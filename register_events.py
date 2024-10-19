@@ -2,7 +2,7 @@ import pandas as pd
 
 file_path = 'data_file/registered_events.xlsx'  # 既存のExcelファイルのパス
 
-def add_events(address, date, time):
+def add_events(address, date, time): #イベントの追加
     df = pd.read_excel(file_path)
 
     new_event = {'住所': address, '開催日時': date, '開催時間': time}
@@ -16,7 +16,7 @@ def add_events(address, date, time):
 
 #add_events('b', '12/12', '10:00')
 
-def read_events(col):
+def read_events(col): 
     df = pd.read_excel('data_file/registered_events.xlsx', sheet_name='Sheet1')
 
     read_list = df[col].tolist()

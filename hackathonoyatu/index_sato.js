@@ -18,14 +18,14 @@ function initMap() {
     .bindPopup('東京')
     .openPopup();
 
-  // 住所検索機能を追加
+  // 住所検索機能を追加（日本国内に限定）
   document.getElementById('search-btn').addEventListener('click', function () {
     const address = document.getElementById('address-input').value;
 
     if (address) {
-      // Nominatim APIを使用して住所をジオコーディング
+      // Nominatim APIを使用して、住所をジオコーディング（日本国内に限定）
       fetch(
-        `https://nominatim.openstreetmap.org/search?format=json&limit=1&q=${encodeURIComponent(
+        `https://nominatim.openstreetmap.org/search?format=json&countrycodes=JP&limit=1&q=${encodeURIComponent(
           address
         )}`
       )

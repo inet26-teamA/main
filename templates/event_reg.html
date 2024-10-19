@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>新しいピンを追加</title>
+</head>
+<body>
+  <h1>新しいピンを追加</h1>
+  <form action="/event_reg" method="post">
+    <label for="name">ピンの名前:</label>
+    <input type="text" id="name" name="name" required><br><br>
+    <label for="latitude">緯度:</label>
+    <input type="text" id="latitude" name="latitude" required><br><br>
+    <label for="longitude">経度:</label>
+    <input type="text" id="longitude" name="longitude" required><br><br>
+    <button type="submit">追加</button>
+  </form>
+  <a href="/">地図に戻る</a>
+</body>
+</html>

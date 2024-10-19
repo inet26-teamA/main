@@ -13,7 +13,6 @@ def index():
 # 新しいピンを追加するページのエンドポイント
 @app.route('/event_reg', methods=['GET', 'POST'])
 def event_reg():
-
     # まだ仮
     if request.method == 'POST':
         # フォームからピンの情報を取得

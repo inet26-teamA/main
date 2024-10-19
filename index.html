@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Python and JavaScript Integration</title>
+</head>
+<body>
+  <h1>Flaskからのメッセージを表示</h1>
+  <button id="fetchData">データ取得</button>
+  <p id="responseData"></p>
+
+  <script>
+    document.getElementById("fetchData").addEventListener("click", function() {
+      fetch('/api/data')
+        .then(response => response.json())
+        .then(data => {
+          document.getElementById("responseData").innerText = data.message;
+        });
+    });
+  </script>
+</body>
+</html>

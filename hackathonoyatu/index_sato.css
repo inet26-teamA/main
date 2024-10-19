@@ -7,12 +7,27 @@ body, html {
 
 /* 地図表示領域のスタイル */
 #map {
-  height: 90%; /* ヘッダー部分を除いた残りの高さに設定 */
-  width: 100%; /* 全幅 */
+  height: 80vh; /* ビューポートの高さの80%を使用 */
+  width: 100%;
 }
 
 /* ヘッダーのスタイル */
 h1 {
   text-align: center;
   margin: 20px 0;
+}
+
+/* 住所検索のスタイル */
+.search-container {
+  text-align: center;
+  margin: 10px 0;
+}
+
+#address-input {
+  padding: 5px;
+  width: 250px;
+}
+
+#search-btn {
+  padding: 5px 10px;
 }

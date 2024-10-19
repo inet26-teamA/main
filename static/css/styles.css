@@ -23,19 +23,24 @@ h1 {
 }
 
 .top-left-container {
-  background-color: red;
-  width: 100px;
+  /* background-color: red; */
+  width: 400px;
+}
+
+.weather-image {
+  width: 40px;
 }
 
 /* 住所検索のスタイル */
 .search-container {
   text-align: center;
   margin: 10px 0;
+  width: 400px;
 }
 
 .top-right-container {
   background-color: blue;
-  width: 100px;
+  width: 400px;
 }
 
 #address-input {

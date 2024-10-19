@@ -1,3 +1,8 @@
+"""
+・天気を取得する
+get_weather('都市名')
+"""
+
 import requests
 from datetime import datetime, timedelta
 
@@ -27,6 +32,7 @@ def get_weather(city):
     else:
         print('Error:', response.status_code, response.text)
     
-    return weather_data
+    #return weather_data #時刻と天気を2次元リストで取得する
+    return [sublist[1] for sublist in weather_data] #天気だけをリストで取得する
 
-print(get_weather('tokyo'))
+#print(get_weather('tokyo'))

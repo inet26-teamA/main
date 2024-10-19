@@ -1,3 +1,8 @@
+"""
+・geminiからのメッセージを受け取る
+ask_gemini('プロンプト')
+"""
+
 import google.generativeai as genai
 
 genai.configure(api_key='AIzaSyCmuQlhuS0Fl00jI7h8PJIM_An1tBv-09Y')

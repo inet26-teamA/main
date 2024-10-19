@@ -1,4 +1,5 @@
 from flask import Flask, render_template, jsonify, request, redirect
+import add_app_file.get_weather as getweather#天気の取得を行うライブラリ
 
 app = Flask(__name__)
 
@@ -8,7 +9,9 @@ pins = []
 # 地図表示ページのエンドポイント
 @app.route('/', methods=['GET'])
 def index():
-    return render_template('index.html', pins=pins)
+    weather_img = getweather.get_weather('tokyo')
+    print(weather_img)
+    return render_template('index.html', pins=pins, images = weather_img)
 
 # 新しいピンを追加するページのエンドポイント
 @app.route('/event_reg', methods=['GET', 'POST'])

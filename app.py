@@ -5,12 +5,6 @@ app = Flask(__name__)
 # ピン情報を格納するリスト
 pins = []
 
-# APIエンドポイントの定義
-@app.route('/api/data', methods=['GET'])
-def get_data():
-    data = {"message": "Hello from Python!"}
-    return jsonify(data)
-
 # 地図表示ページのエンドポイント
 @app.route('/', methods=['GET'])
 def index():

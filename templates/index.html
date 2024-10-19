@@ -1,67 +1,32 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Leaflet Map サンプル</title>
+  <title>住所検索付きのLeaflet Map</title>
   <!-- LeafletのCSSを読み込み -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <!-- アプリのスタイルシート -->
+  <link rel="stylesheet" href="/static/css/styles.css">
 </head>
-<body>
-  <h1>Leaflet Map 表示</h1>
-  <a href='/event_reg' style='position: absolute; top: 10px; right: 10px;'>ピンを追加</a>
 
-  <div id="map" style="height: 90vh;"></div>
+<body>
+  <h1>住所検索付きのLeaflet Map</h1>
+
+  <!-- 住所入力フィールドと検索ボタン -->
+  <div class="search-container">
+    <input type="text" id="address-input" placeholder="住所を入力">
+    <button id="search-btn">検索</button>
+  </div>
+
+  <!-- 地図を表示する要素 -->
+  <div id="map"></div>
 
   <!-- LeafletのJSを読み込み -->
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-  <script>
-    // 地図を初期化し、表示するための関数
-    function initMap(location) {
-      // 地図を初期化して、表示する
-      const map = L.map('map').setView(location, 12); // 第2引数はズームレベル
-
-      // OpenStreetMapのタイルレイヤーを追加
-      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-      }).addTo(map);
-
-      // マーカーを現在地に追加
-      L.marker(location).addTo(map)
-        .bindPopup('現在地')
-        .openPopup();
-
-      // サーバーサイドからピン情報を取得し、地図に追加
-      fetch('/api/data_pins')
-        .then(response => response.json())
-        .then(pins => {
-          pins.forEach(pin => {
-            L.marker([pin.latitude, pin.longitude]).addTo(map)
-              .bindPopup(pin.name);
-          });
-        })
-        .catch(error => {
-          console.error('ピン情報の取得に失敗しました:', error);
-        });
-    }
-
-    // 位置情報を取得する
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(function(position) {
-        const currentLocation = [position.coords.latitude, position.coords.longitude];
-        initMap(currentLocation);
-      }, function(error) {
-        console.error('位置情報を取得できませんでした:', error);
-        alert('位置情報を取得できなかったため、地図の中心をデフォルト位置に設定します。');
-        const defaultLocation = [35.6762, 139.6503]; // 東京の緯度と経度
-        initMap(defaultLocation);
-      });
-    } else {
-      alert('お使いのブラウザでは位置情報がサポートされていません。');
-      const defaultLocation = [35.6762, 139.6503]; // 東京の緯度と経度
-      initMap(defaultLocation);
-    }
-  </script>
-
+  <!-- アプリのJavaScriptファイル -->
+  <script src="static/js/script.js"></script>
 </body>
+
 </html>

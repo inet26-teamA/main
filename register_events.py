@@ -16,7 +16,7 @@ def add_events(address, date, time): #イベントの追加
 
 #add_events('b', '12/12', '10:00')
 
-def read_events(col): #イベントの取得
+def read_events(col): #イベントの取得 
     df = pd.read_excel('data_file/registered_events.xlsx', sheet_name='Sheet1')
 
     read_list = df[col].tolist()

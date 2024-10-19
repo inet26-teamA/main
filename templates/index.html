@@ -32,7 +32,11 @@
 
     <!-- カレンダーボタン -->
     <div class="top-right-container">
-
+      <form action="{{ url_for('event_reg') }}" method="get">
+        <button id = "add-event">イベントの登録</button>
+      </form>
+      
+      <button id = "past-events">去年のイベント</button>
     </div>
   </div>
 

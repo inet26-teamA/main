@@ -39,8 +39,15 @@ h1 {
 }
 
 .top-right-container {
+  display: flex;
   background-color: blue;
   width: 400px;
+}
+
+#add-event, #past-events {
+  width: 100px;
+  height: 70px;
+  margin-right: 10px;
 }
 
 #address-input {

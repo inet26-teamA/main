@@ -14,10 +14,23 @@
 <body>
   <h1>住所検索付きのLeaflet Map</h1>
 
-  <!-- 住所入力フィールドと検索ボタン -->
-  <div class="search-container">
-    <input type="text" id="address-input" placeholder="住所を入力">
-    <button id="search-btn">検索</button>
+  <!-- 天気・観光地登録へのボタン・検索・カレンダー -->
+  <div class="top-container">
+    <!-- 天気 -->
+    <div class="top-left-container">
+      <img src="{{ image }}.jpg">
+    </div>
+
+    <!-- 住所入力フィールドと検索ボタン -->
+    <div class="search-container">
+      <input type="text" id="address-input" placeholder="住所を入力">
+      <button id="search-btn">検索</button>
+    </div>
+
+    <!-- カレンダーボタン -->
+    <div class="top-right-container">
+
+    </div>
   </div>
 
   <!-- 地図を表示する要素 -->

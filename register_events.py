@@ -1,8 +1,15 @@
+"""
+・イベントを登録する
+add_events('住所', '開催日時')
+・イベントを取得する
+get_events()
+"""
+
 import pandas as pd
 
 file_path = 'data_file/registered_events.xlsx'  # 既存のExcelファイルのパス
 
-def add_events(address, date, time): #イベントの追加
+def add_events(address: str, year: int, month: int, date: int): #イベントの追加
     df = pd.read_excel(file_path)
 
     new_event = {'住所': address, '開催日時': date, '開催時間': time}
@@ -14,13 +21,10 @@ def add_events(address, date, time): #イベントの追加
 
     print(f"新しいイベントが追加され、{file_path}に保存されました。")
 
-#add_events('b', '12/12', '10:00')
 
-def read_events(col): #イベントの取得 
+def get_events(col): #イベントの取得 
     df = pd.read_excel('data_file/registered_events.xlsx', sheet_name='Sheet1')
 
     read_list = df[col].tolist()
     
     return read_list
-
-#print(read_events('住所'))

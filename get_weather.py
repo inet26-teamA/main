@@ -29,4 +29,4 @@ def get_weather(city):
     
     return weather_data
 
-#print(get_weather('tokyo'))
+print(get_weather('tokyo'))

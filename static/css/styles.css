@@ -17,10 +17,25 @@ h1 {
   margin: 20px 0;
 }
 
+.top-container {
+  display: flex;
+  justify-content: space-around;
+}
+
+.top-left-container {
+  background-color: red;
+  width: 100px;
+}
+
 /* 住所検索のスタイル */
 .search-container {
   text-align: center;
   margin: 10px 0;
+}
+
+.top-right-container {
+  background-color: blue;
+  width: 100px;
 }
 
 #address-input {

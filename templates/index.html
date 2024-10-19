@@ -19,6 +19,9 @@
     <!-- 天気 -->
     <div class="top-left-container">
       <p>3時間ごとの天気</p>
+      {% for message in gemini_message %}
+        <p class="weather-gemini-message">{{ message }}</p>
+      {% endfor %}
       {% for image in images %}
         <img src="../static/img/{{ image }}.png" alt="{{ image }}.png" class="weather-image">
       {% endfor %}
@@ -36,7 +39,9 @@
         <button id = "add-event">イベントの登録</button>
       </form>
       
-      <button id = "past-events">去年のイベント</button>
+      <form action="{{ url_for('past_events') }}" method="get">
+        <button id = "past-events">去年のイベント</button>
+      </form>
     </div>
   </div>
 

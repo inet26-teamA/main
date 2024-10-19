@@ -24,7 +24,12 @@ h1 {
 
 .top-left-container {
   /* background-color: red; */
-  width: 400px;
+  width: 300px;
+}
+
+.weather-gemini-message {
+  display: inline;
+  /* background-color: green; */
 }
 
 .weather-image {
@@ -40,7 +45,7 @@ h1 {
 
 .top-right-container {
   display: flex;
-  background-color: blue;
+  /* background-color: blue; */
   width: 400px;
 }
 

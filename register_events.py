@@ -14,7 +14,7 @@ def add_events(address, date, time):
 
     print(f"新しいイベントが追加され、{file_path}に保存されました。")
 
-add_events('b', '12/12', '10:00')
+#add_events('b', '12/12', '10:00')
 
 def read_events(col):
     df = pd.read_excel('data_file/registered_events.xlsx', sheet_name='Sheet1')
@@ -23,4 +23,4 @@ def read_events(col):
     
     return read_list
 
-print(read_events('住所'))
+#print(read_events('住所'))

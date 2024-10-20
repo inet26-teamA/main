@@ -1,7 +1,7 @@
 from flask import Flask, render_template, jsonify, request, redirect
 import get_weather as getweather #天気の取得を行うライブラリ
 # import gemini_api as gemini #geminiからメッセージを受け取るライブラリ
-import register_events as register_events
+import register_events
 
 app = Flask(__name__)
 
@@ -27,11 +27,12 @@ def submit():
     eventname = request.form.get('eventname')
     zipcode = request.form.get('zipcode')
     address = request.form.get('address')
-    username = request.form.get('username')
     start_date = request.form.get('start-date')
-    end_date = request.form.get('end-date')
 
-    print(eventname)
+    address = f"{zipcode}, {address}"
+    year, month, date = map(int, start_date.split('-'))
+    #print(f'イベント名: {eventname} , 住所: {address} , 日時: {year},{month},{date}')
+    register_events.add_events(year, month, date, eventname, address)
     
 
     #return f"イベント名: {eventname}, 郵便番号: {zipcode}, 住所: {address}, 番地: {username}, 開始日: {start_date}, 終了日: {end_date}"

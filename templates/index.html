@@ -53,6 +53,27 @@
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
   <!-- アプリのJavaScriptファイル -->
   <script src="/static/js/script.js"></script>
+  <script>
+    document.getElementById('search-btn').addEventListener('click', function() {
+      const address = document.getElementById('address-input').value;
+  
+      fetch('/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ address: address }),
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+          location.reload(); // 天気が更新されたページにリロード
+        } else {
+          alert('住所の取得に失敗しました');
+        }
+      });
+    });
+  </script>
 </body>
 
 </html>

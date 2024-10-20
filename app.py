@@ -2,6 +2,7 @@ from flask import Flask, render_template, jsonify, request, redirect
 import get_weather as getweather #天気の取得を行うライブラリ
 # import gemini_api as gemini #geminiからメッセージを受け取るライブラリ
 import register_events
+import requests
 
 app = Flask(__name__)
 
@@ -11,10 +12,11 @@ pins = []
 # 地図表示ページのエンドポイント
 @app.route('/', methods=['GET'])
 def index():
-    tokyo_lat = 35.6895
-    tokyo_lon = 139.6917
-    weather_img = getweather.get_weather(tokyo_lat, tokyo_lon)
-    #weather_img = getweather.get_weather('tokyo')
+    geo_request_url = 'https://get.geojs.io/v1/ip/geo.json'
+    data = requests.get(geo_request_url).json()
+    lat = data['latitude']
+    lon = data['latitude']
+    weather_img = getweather.get_weather(lat, lon)
     #pronpt = f"次のリストは3時間ごと合計18時間の天気です。一言で天気のポイントをまとめてください。語尾は「になるでしょう」15文字以内 {weather_img}"
     message = "てすと"
     #message = gemini.ask_gemini(pronpt)

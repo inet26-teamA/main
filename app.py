@@ -1,7 +1,7 @@
 from flask import Flask, render_template, jsonify, request, redirect
-import add_app_file.get_weather as getweather #天気の取得を行うライブラリ
-import add_app_file.gemini_api as gemini #geminiからメッセージを受け取るライブラリ
-import add_app_file.register_events as register_events
+import get_weather as getweather #天気の取得を行うライブラリ
+# import gemini_api as gemini #geminiからメッセージを受け取るライブラリ
+import register_events as register_events
 
 app = Flask(__name__)
 
@@ -12,8 +12,9 @@ pins = []
 @app.route('/', methods=['GET'])
 def index():
     weather_img = getweather.get_weather('tokyo')
-    pronpt = f"次のリストは3時間ごと合計18時間の天気です。一言で天気のポイントをまとめてください。語尾は「になるでしょう」15文字以内 {weather_img}"
-    message = gemini.ask_gemini(pronpt)
+    #pronpt = f"次のリストは3時間ごと合計18時間の天気です。一言で天気のポイントをまとめてください。語尾は「になるでしょう」15文字以内 {weather_img}"
+    message = "てすと"
+    #message = gemini.ask_gemini(pronpt)
     return render_template('index.html', pins=pins, images = weather_img, gemini_message = message)
 
 # 新しいピンを追加するページのエンドポイント

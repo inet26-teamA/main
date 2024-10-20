@@ -10,12 +10,14 @@
 </head>
 
 <body>
-  <button type="button" id = "back_button" onclick="location.href='/'">戻る</button>
-
-  <h1>登録画面</h1>
+  <div class="back_button">
+    <a href="/">戻る</a>
+  </div>
   
+  <h1>登録画面</h1>
+
   <form method="POST" action="/submit"> <!-- methodとactionを追加 -->
-    
+
     <h2>イベント名</h2>
     <input type="text" id="eventname" name="eventname" required> <!-- 必要なname属性を追加 -->
 
@@ -30,20 +32,13 @@
     <label for="username">番地:</label>
     <input type="text" id="username" name="username" placeholder="3-3-33" required>
 
-    <h2>詳細</h2>
-    <label for="start-date">開催期間:</label>
-    <input type="date" id="start-date" name="start-date" required>
-
-    <p id="error-message" style="color: red; display: none;"></p>
-
-    <button id="date_btn" type="submit">送信</button> <!-- 最後に1つの送信ボタン -->
-  </form>
+    </form>
 
 
   <h2>詳細</h2>
 
   <form id="date-form">
-      <label for="start-date">開催期間:</label> <!-- 開催期間のラベル -->
+      <label for="start-date">開催日:</label> <!-- 開催期間のラベル -->
       <input type="date" id="start-date" name="start-date"> <!-- 開始日 -->
 
       <button id="regist_button" type="button">登録</button>
@@ -78,4 +73,5 @@
   </script>
 
 </body>
+
 </html>

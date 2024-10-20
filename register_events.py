@@ -29,9 +29,11 @@ def add_events(year: int, month: int, date: int, event_name: str, address: str):
 def get_events(col): #イベントの取得 
     df = pd.read_excel('data_file/registered_events.xlsx', sheet_name='Sheet1')
 
-    read_list = df[col].tolist()
+    read_list = df[col].values.tolist()
     
     return read_list
+
+#print(get_events(['住所', 'イベント名']))
 
 def get_all_col():
     df = pd.read_excel('data_file/registered_events.xlsx', sheet_name='Sheet1')

@@ -22,7 +22,8 @@ def index():
 
 @app.route('/add_pin_data', methods = ['GET'])
 def add_pin():
-    return jsonify(register_events.get_events('住所'))
+    print(register_events.get_events(['住所', 'イベント名']))
+    return jsonify(register_events.get_events(['住所', 'イベント名']))
 
 @app.route('/event_reg')
 def event_reg():

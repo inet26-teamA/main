@@ -3,6 +3,7 @@ import get_weather as getweather #天気の取得を行うライブラリ
 # import gemini_api as gemini #geminiからメッセージを受け取るライブラリ
 import register_events
 import requests
+from geopy.geocoders import Nominatim
 
 app = Flask(__name__)
 

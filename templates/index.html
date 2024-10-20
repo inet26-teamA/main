@@ -22,14 +22,14 @@
     <div class="top-left-container">
       <p>3時間ごとの天気</p>
       {% for message in gemini_message %}
-          <!-- <p class="weather-gemini-message">{{ message }}</p> -->
+      <!-- <p class="weather-gemini-message">{{ message }}</p> -->
       {% endfor %}
       {% for image in images %}
-        <img src="../static/img/{{ image }}.png" alt="{{ image }}.png" class="weather-image">
+      <img src="../static/img/{{ image }}.png" alt="{{ image }}.png" class="weather-image">
       {% endfor %}
 
-  </div>
-  
+    </div>
+
 
     <!-- 住所入力フィールドと検索ボタン -->
     <div class="search-container">
@@ -40,11 +40,11 @@
     <!-- カレンダーボタン -->
     <div class="top-right-container">
       <form action="{{ url_for('event_reg') }}" method="get">
-        <button id = "add-event">イベントの登録</button>
+        <button id="add-event">イベントの登録</button>
       </form>
-      
+
       <form action="{{ url_for('past_events') }}" method="get">
-        <button id = "past-events">過去に登録されたイベント</button>
+        <button id="past-events">過去に登録されたイベント</button>
       </form>
     </div>
   </div>
@@ -57,26 +57,50 @@
   <!-- アプリのJavaScriptファイル -->
   <script src="/static/js/script.js"></script>
   <script>
-    document.getElementById('search-btn').addEventListener('click', function() {
+    // search-btnクリックイベント
+    document.getElementById('search-btn').addEventListener('click', async function () {
       const address = document.getElementById('address-input').value;
-  
-      fetch('/', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ address: address }),
-      })
-      .then(response => response.json())
-      .then(data => {
-        if (data.success) {
-          location.reload(); // 天気が更新されたページにリロード
-        } else {
-          alert('住所の取得に失敗しました');
+      if (address) {
+        try {
+          // Nominatim APIで住所の緯度経度を取得
+          const geoResponse = await fetch(`https://nominatim.openstreetmap.org/search?format=json&countrycodes=JP&limit=1&q=${encodeURIComponent(address)}`);
+          const geoData = await geoResponse.json();
+          if (geoData && geoData.length > 0) {
+            const lat = parseFloat(geoData[0].lat);
+            const lon = parseFloat(geoData[0].lon);
+
+            // OpenWeather APIで天気情報を取得 (APIキーが必要です)
+            const apiKey = '4d11781b6190ab2bd390e6df45db4356';
+            const weatherResponse = await fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric&lang=en`);
+            const weatherData = await weatherResponse.json();
+
+            // 取得した天気情報をDOMに動的に追加
+            const imageContainer = document.querySelector('.top-left-container');
+            imageContainer.innerHTML = `<p>${address}の3時間ごとの天気</p>`; // 初期設定
+
+            // 3時間ごとの天気データを6つ表示（アイコンのみ）
+            for (let i = 0; i < 6; i++) {
+              const weather = weatherData.list[i];
+              const imgElement = document.createElement('img');
+              imgElement.src = `../static/img/${weather.weather[0].description}.png`;
+              imgElement.alt = `${weather.weather[0].icon}.png`;
+              imgElement.className = 'weather-image';
+              imageContainer.appendChild(imgElement);
+            }
+
+          } else {
+            alert('住所が見つかりませんでした。');
+          }
+        } catch (error) {
+          console.error('Error:', error);
+          alert('検索中にエラーが発生しました。');
         }
-      });
+      } else {
+        alert('住所を入力してください。');
+      }
     });
   </script>
+
 </body>
 
 </html>

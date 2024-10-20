@@ -16,7 +16,7 @@
 
   <h1>登録画面</h1>
 
-  <form method="POST" action="/submit" class="vertical-form"> 
+  <form method="POST" action="/submit" class="vertical-form" id="registration-form"> 
     <h2>イベント名</h2>
     <input type="text" id="eventname" name="eventname" required>
 
@@ -63,6 +63,14 @@
       } else {
         alert('郵便番号は7桁で入力してください。');
       }
+    });
+
+    // 登録フォームの送信時にポップアップを表示
+    const registrationForm = document.getElementById('registration-form');
+    registrationForm.addEventListener('submit', function (event) {
+      event.preventDefault(); // フォームのデフォルト送信を防ぐ
+      alert('登録しました'); // ポップアップ表示
+      registrationForm.submit(); // フォームを送信
     });
   </script>
 </body>

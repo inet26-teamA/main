@@ -17,11 +17,24 @@
 
     <!-- カレンダー表示 -->
     <h1>登録済みイベント</h1>
-    <ul>
-        {% for event in events %}
-        <li>{{ event[0] }}年 {{ event[1] }}月 {{ event[2] }}日 - {{ event[3] }}</li>
-        {% endfor %}
-    </ul>
+    <table class="event_list">
+        <thead>
+            <tr>
+                <th class="icon"><i class="fas fa-calendar-alt"></i></th>
+                <th>日付</th>
+                <th>イベント名</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for event in events %}
+            <tr>
+                <td class="icon"><i class="fas fa-star"></i></td>
+                <td>{{ event[0] }}年 {{ event[1] }}月 {{ event[2] }}日</td>
+                <td>{{ event[3] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 </body>
 
 </html>

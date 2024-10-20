@@ -10,13 +10,12 @@ from datetime import datetime, timedelta
 API_KEY = '4d11781b6190ab2bd390e6df45db4356'  # ここに自分のAPIキーを入力
 # 取得したい都市名
 
-def get_weather(city):
+def get_weather(lat, lon):
     # APIエンドポイントURL
-    url = f'http://api.openweathermap.org/data/2.5/forecast?q={city}&appid={API_KEY}&units=metric'
+    url = f'http://api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid={API_KEY}&units=metric'
     response = requests.get(url)
 
     if response.status_code == 200:
-        print("SSSS")
         data = response.json()
         weather_data = []
         now = datetime.now()

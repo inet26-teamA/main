@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
   <title>Python and JavaScript Integration</title>
@@ -8,12 +9,14 @@
 </head>
 
 <body>
-  <button type="button" id = "back_button" onclick="location.href='/'">戻る</button>
-
-  <h1>登録画面</h1>
+  <div class="back_button">
+    <a href="/">戻る</a>
+  </div>
   
+  <h1>登録画面</h1>
+
   <form method="POST" action="/submit"> <!-- methodとactionを追加 -->
-    
+
     <h2>イベント名</h2>
     <input type="text" id="eventname" name="eventname" required> <!-- 必要なname属性を追加 -->
 
@@ -38,7 +41,7 @@
   </form>
 
   <script>
-    document.getElementById('date_btn').addEventListener('click', function(event) {
+    document.getElementById('date_btn').addEventListener('click', function (event) {
       const startDate = new Date(document.getElementById('start-date').value);
       const endDate = new Date(document.getElementById('end-date').value);
 
@@ -80,4 +83,5 @@
   </script>
 
 </body>
+
 </html>

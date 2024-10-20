@@ -7,7 +7,7 @@ import requests
 from datetime import datetime, timedelta
 
 # OpenWeatherMapのAPIキー
-API_KEY = 'd3cfff3d64a8c653aaf9441b1a575b35'  # ここに自分のAPIキーを入力
+API_KEY = '4d11781b6190ab2bd390e6df45db4356'  # ここに自分のAPIキーを入力
 # 取得したい都市名
 
 def get_weather(city):
@@ -16,6 +16,7 @@ def get_weather(city):
     response = requests.get(url)
 
     if response.status_code == 200:
+        print("SSSS")
         data = response.json()
         weather_data = []
         now = datetime.now()

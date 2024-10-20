@@ -5,10 +5,10 @@ ask_gemini('プロンプト')
 
 import google.generativeai as genai
 
-genai.configure(api_key='AIzaSyCmuQlhuS0Fl00jI7h8PJIM_An1tBv-09Y')
+genai.configure(api_key='AIzaSyAHDMoyXQwswmJA3501X1NP0gpLKzuoQ2A')
 
 def ask_gemini(prompt):
-    gemini_pro = genai.GenerativeModel("gemini-pro")
+    gemini_pro = genai.GenerativeModel("gemini-1.5-flash")
     response = gemini_pro.generate_content(prompt)
     return response.text
 

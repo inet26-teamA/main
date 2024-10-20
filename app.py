@@ -14,7 +14,6 @@ def index():
     tokyo_lat = 35.6895
     tokyo_lon = 139.6917
     weather_img = getweather.get_weather(tokyo_lat, tokyo_lon)
-    #weather_img = getweather.get_weather('tokyo')
     #pronpt = f"次のリストは3時間ごと合計18時間の天気です。一言で天気のポイントをまとめてください。語尾は「になるでしょう」15文字以内 {weather_img}"
     message = "てすと"
     #message = gemini.ask_gemini(pronpt)

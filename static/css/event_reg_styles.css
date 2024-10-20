@@ -123,3 +123,26 @@ label {
 	color: #fff;
 	background: #27acd9;
 }
+
+
+#back_button {
+    writing-mode: horizontal-tb; /* テキストを横書きに設定 */
+    text-orientation: mixed; /* テキストの向きを混合に設定（通常の横書き） */
+    display: flex; /* フレックスボックスでレイアウトを設定 */
+    align-items: center; /* 垂直方向で中央揃え */
+    justify-content: center; /* 水平方向で中央揃え */
+    width: 120px; /* ボタンの幅を120pxに設定 */
+    /*margin: auto; /* ボタンを中央に配置 */
+    padding: 1rem 5rem; /* 上下に1rem、左右に6remのパディングを追加 */
+    font-weight: bold; /* フォントを太字に設定 */
+    border: 2px solid #27acd9; /* ボタンの枠線を2pxの実線に設定 */
+    color: #27acd9; /* テキストの色を指定 */
+    border-radius: 100vh; /* ボタンの角を丸くする（楕円形にする） */
+    transition: 0.5s; /* 変化にかかる時間を0.5秒に設定 */
+}
+
+
+#back_button:hover {
+	color: #fff;
+	background: #27acd9;
+}

@@ -5,32 +5,38 @@
   <meta charset="UTF-8">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
   <title>Python and JavaScript Integration</title>
-  <link rel="stylesheet" href="/static/css/event_reg_styles.css"> <!-- CSSファイルをリンク -->
+  <link rel="stylesheet" href="/static/css/event_reg_styles.css">
+  <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
 </head>
 
 <body>
-  <button type="button" onclick="history.back()" id="historyback-btn">戻る</button>
+  <button type="button" id = "back_button" onclick="location.href='/'">戻る</button>
 
   <h1>登録画面</h1>
-  <h2>イベント名</h2>
-  <form>
-    <input type="text" id="eventname" name="eventname"> <!-- 日付入力 -->
-  </form>
+  
+  <form method="POST" action="/submit"> <!-- methodとactionを追加 -->
+    
+    <h2>イベント名</h2>
+    <input type="text" id="eventname" name="eventname" required> <!-- 必要なname属性を追加 -->
 
-  <h2>場所情報</h2>
-
-  <form class="vertical-form"> <!-- クラスを追加 -->
-  <div class="zipcode-group">
-    <label for="zipcode">郵便番号:</label>
-    <input type="text" id="zipcode" name="zipcode" oninput="fetchAddress(this.value)" placeholder="3360000">
-
-    <button type="button" id="fetch-address-btn">住所補完</button>
-  </div>
+    <h2>場所情報</h2>
+    <div class="zipcode-group">
+      <label for="zipcode">郵便番号:</label>
+      <input type="text" id="zipcode" name="zipcode" oninput="fetchAddress(this.value)" placeholder="3360000" required>
+      <button type="button" id="fetch-address-btn">住所補完</button>
+    </div>
     <label for="address">住所:</label>
-    <input type="text" id="address" name="address" placeholder="東京都世田谷区" readonly>
+    <input type="text" id="address" name="address" placeholder="東京都世田谷区" readonly required>
+    <label for="username">番地:</label>
+    <input type="text" id="username" name="username" placeholder="3-3-33" required>
 
-    <label for="username">番地:</label> <!-- 番地ラベルを追加 -->
-    <input type="text" id="username" name="username" placeholder="3-3-33">
+    <h2>詳細</h2>
+    <label for="start-date">開催期間:</label>
+    <input type="date" id="start-date" name="start-date" required>
+
+    <p id="error-message" style="color: red; display: none;"></p>
+
+    <button id="date_btn" type="submit">送信</button> <!-- 最後に1つの送信ボタン -->
   </form>
 
 
@@ -40,18 +46,16 @@
       <label for="start-date">開催期間:</label> <!-- 開催期間のラベル -->
       <input type="date" id="start-date" name="start-date"> <!-- 開始日 -->
 
-  <button id="regist_button" type="button">登録</button>
+      <button id="regist_button" type="button">登録</button>
 
-  <script>
+<script>
     const addressInput = document.getElementById('address');
     const fetchButton = document.getElementById('fetch-address-btn');
 
-    // 住所補完ボタンのクリックイベント
     fetchButton.addEventListener('click', function () {
       const zipCode = document.getElementById('zipcode').value;
 
       if (zipCode.length === 7) {
-        // 自動補完中は手動入力を禁止
         addressInput.readOnly = true;
 
         fetch(`https://api.zipaddress.net/?zipcode=${zipCode}`, { mode: 'cors' })
@@ -65,7 +69,6 @@
           })
           .catch(error => console.error('エラー:', error))
           .finally(() => {
-            // 自動補完後は再び手動入力可能にする
             addressInput.readOnly = false;
           });
       } else {
@@ -73,5 +76,6 @@
       }
     });
   </script>
+
 </body>
 </html>

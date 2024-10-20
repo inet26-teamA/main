@@ -1,22 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Event Calendar</title>
 
     <link rel="stylesheet" href="/static/css/past_events_styles.css">
+    <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
 </head>
+
 <body>
-    <button type="button" onclick="history.back()">戻る</button>
+    <div class="back_button">
+        <a href="/">戻る</a>
+    </div>
+    
     <h1>イベントカレンダー</h1>
 
     <!-- カレンダー表示 -->
     <h2>登録済みイベント</h2>
     <ul>
         {% for event in events %}
-            <li>{{ event[0] }}年 {{ event[1] }}月 {{ event[2] }}日 - {{ event[3] }}</li>
+        <li>{{ event[0] }}年 {{ event[1] }}月 {{ event[2] }}日 - {{ event[3] }}</li>
         {% endfor %}
     </ul>
 </body>
+
 </html>

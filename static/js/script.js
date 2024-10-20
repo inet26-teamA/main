@@ -7,27 +7,34 @@ function initMap() {
     attribution: '&copy; OpenStreetMap contributors',
   }).addTo(map);
 
-  function getCoordinatesFromAddress(address) {
-    // Nominatim APIを使用して住所をジオコーディング
-    fetch(`https://nominatim.openstreetmap.org/search?format=json&countrycodes=JP&limit=1&q=${encodeURIComponent(address)}`)
-        .then((response) => response.json())
-        .then((data) => {
-            if (data && data.length > 0) {
-                const lat = parseFloat(data[0].lat);
-                const lon = parseFloat(data[0].lon);
-                // ここに地図を更新するコードを追加
-                return {lat, lon};
-            } else {
-                alert('住所が見つかりませんでした。');
-            }
-        })
-        .catch((error) => {
-            console.error('Error:', error);
-            alert('検索中にエラーが発生しました。');
-        });
-}
-
-console.log(getCoordinatesFromAddress('山口県山陽小野田市'))
+  async function getCoordinatesFromAddress(address) {
+    try {
+      const response = await fetch(`https://nominatim.openstreetmap.org/search?format=json&countrycodes=JP&limit=1&q=${encodeURIComponent(address)}`);
+      const data = await response.json();
+  
+      if (data && data.length > 0) {
+        const lat = parseFloat(data[0].lat);
+        const lon = parseFloat(data[0].lon);
+        return { lat, lon }; // 成功した場合に座標を返す
+      } else {
+        alert('住所が見つかりませんでした。');
+        return null; // 何も見つからなかった場合
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      alert('検索中にエラーが発生しました。');
+      return null; // エラーが発生した場合
+    }
+  }
+  
+  (async () => {
+    const coords = await getCoordinatesFromAddress('山口県山陽小野田市');
+    if (coords) {
+      console.log(coords); // 座標を表示
+      L.marker([coords.lat, coords.lon]).addTo(map); // 例えば地図にマーカーを追加
+    }
+  })();
+  
 //L.marker([34.69388615509474, 135.53129439101346]).addTo(map);
 
   // 現在地を取得

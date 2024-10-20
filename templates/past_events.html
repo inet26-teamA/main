@@ -14,11 +14,9 @@
     <div class="back_button">
         <a href="/">戻る</a>
     </div>
-    
-    <h1>イベントカレンダー</h1>
 
     <!-- カレンダー表示 -->
-    <h2>登録済みイベント</h2>
+    <h1>登録済みイベント</h1>
     <ul>
         {% for event in events %}
         <li>{{ event[0] }}年 {{ event[1] }}月 {{ event[2] }}日 - {{ event[3] }}</li>

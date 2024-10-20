@@ -1,93 +1,96 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
   <title>Python and JavaScript Integration</title>
-  <link rel="stylesheet" href="/static/css/reg_styles.css">
+  <link rel="stylesheet" href="event_reg.css"> <!-- CSSファイルをリンク -->
 </head>
+
 <body>
   <h1>登録画面</h1>
-  <h2>場所情報</h2>
+  <h2>イベント名</h2>
   <form>
-    <label for="username">都道府県</label>
-    <input type="text" id="username" name="username" placeholder="東京都">
+    <input type="text" id="eventname" name="eventname"> <!-- 日付入力 -->
   </form>
-  <form>
-    <label for="username">郵便番号</label>
-    <input type="text" id="username" name="username" placeholder="336‐0000">
-  </form>
-  <button type="button">郵便番号で検索</button>
-  <form>
-    <label for="username">市区町村</label>
-    <input type="text" id="username" name="username" placeholder="世田谷区">
-  </form>
-  <form>
 
-    <label for="username">番地</label>
+  <h2>場所情報</h2>
+
+  <form class="vertical-form"> <!-- クラスを追加 -->
+  <div class="zipcode-group">
+    <label for="zipcode">郵便番号:</label>
+    <input type="text" id="zipcode" name="zipcode" oninput="fetchAddress(this.value)" placeholder="3360000">
+
+    <button type="button" id="fetch-address-btn">住所補完</button>
+  </div>
+    <label for="address">住所:</label>
+    <input type="text" id="address" name="address" placeholder="東京都世田谷区" readonly>
+
+    <label for="username">番地:</label> <!-- 番地ラベルを追加 -->
     <input type="text" id="username" name="username" placeholder="3-3-33">
   </form>
 
+
   <h2>詳細</h2>
-   <form>
-    
-    <label for="username">開催年</label>
-    <input type="text" id="username" name="username" placeholder="2024">
+
+  <form id="date-form">
+      <label for="start-date">開催期間:</label> <!-- 開催期間のラベル -->
+      <input type="date" id="start-date" name="start-date"> <!-- 開始日 -->
+      ~ <!-- 範囲を示すための波線 -->
+      <input type="date" id="end-date" name="end-date"> <!-- 終了日 -->
+      <button id="date_btn" type="submit">送信</button> <!-- 送信ボタン -->
   </form>
+  <p id="error-message" style="color: red; display: none;"></p> <!-- エラーメッセージ表示用 -->
   
+  <script>
+      document.getElementById('date-form').addEventListener('submit', function(event) {
+          event.preventDefault(); // フォームのデフォルト送信を防止
   
-  <form>
-    <label for="fruits">開催日程</label>
-    <select id="fruits" name="fruits">
-      <option value="1">1月</option>
-      <option value="2">2月</option>
-      <option value="3">3月</option>
-      <option value="4">4月</option>
-      <option value="1">5月</option>
-      <option value="2">6月</option>
-      <option value="3">7月</option>
-      <option value="4">8月</option>
-      <option value="2">9月</option>
-      <option value="3">10月</option>
-      <option value="4">11月</option>
-      <option value="4">12月</option>
-    </select>
-    <select id="fruits" name="fruits">
-      <option value="1">1日</option>
-      <option value="2">2日</option>
-      <option value="3">3日</option>
-      <option value="4">4日</option>
-      <option value="1">5日</option>
-      <option value="2">6日</option>
-      <option value="3">7日</option>
-      <option value="4">8日</option>
-      <option value="2">9日</option>
-      <option value="3">10日</option>
-      <option value="4">11日</option>
-      <option value="4">12日</option>
-      <option value="1">13日</option>
-      <option value="2">14日</option>
-      <option value="3">15日</option>
-      <option value="4">16日</option>
-      <option value="1">17日</option>
-      <option value="2">18日</option>
-      <option value="3">19日</option>
-      <option value="4">20日</option>
-      <option value="2">21日</option>
-      <option value="3">22日</option>
-      <option value="4">23日</option>
-      <option value="4">24日</option>
-      <option value="3">25日</option>
-      <option value="4">26日</option>
-      <option value="1">27日</option>
-      <option value="2">28日</option>
-      <option value="3">29日</option>
-      <option value="4">30日</option>
-      <option value="2">31日</option>
-    </select>
-  </form>
-
-
-
-  <button id="fetchData">登録</button>
+          const startDate = new Date(document.getElementById('start-date').value);
+          const endDate = new Date(document.getElementById('end-date').value);
   
+          // 日付の検証
+          if (startDate > endDate) {
+              document.getElementById('error-message').innerText = "エラー: 開始日が終了日よりも後になっています。";
+              document.getElementById('error-message').style.display = "block"; // エラーメッセージを表示
+          } else {
+              document.getElementById('error-message').innerText = ""; // エラーメッセージをクリア
+              document.getElementById('error-message').style.display = "none"; // エラーメッセージを非表示
+          }
+      });
+  </script>
+
+  <button id="regist_button" type="button">登録</button>
+
+  <script>
+    const addressInput = document.getElementById('address');
+    const fetchButton = document.getElementById('fetch-address-btn');
+
+    // 住所補完ボタンのクリックイベント
+    fetchButton.addEventListener('click', function () {
+      const zipCode = document.getElementById('zipcode').value;
+
+      if (zipCode.length === 7) {
+        // 自動補完中は手動入力を禁止
+        addressInput.readOnly = true;
+
+        fetch(`https://api.zipaddress.net/?zipcode=${zipCode}`, { mode: 'cors' })
+          .then(response => response.json())
+          .then(data => {
+            if (data.code === 200) {
+              addressInput.value = data.data.fullAddress;
+            } else {
+              addressInput.value = '住所が見つかりません';
+            }
+          })
+          .catch(error => console.error('エラー:', error))
+          .finally(() => {
+            // 自動補完後は再び手動入力可能にする
+            addressInput.readOnly = false;
+          });
+      } else {
+        alert('郵便番号は7桁で入力してください。');
+      }
+    });
+  </script>
 </body>
 </html>

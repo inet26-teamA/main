@@ -22,7 +22,7 @@
     <div class="top-left-container">
       <p>3時間ごとの天気</p>
       {% for message in gemini_message %}
-          <p class="weather-gemini-message">{{ message }}</p>
+          <!-- <p class="weather-gemini-message">{{ message }}</p> -->
           <img src="../static/img/{{ images[loop.index0] }}.png" alt="{{ images[loop.index0] }}.png" class="weather-image">
       {% endfor %}
   </div>

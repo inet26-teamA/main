@@ -7,6 +7,29 @@ function initMap() {
     attribution: '&copy; OpenStreetMap contributors',
   }).addTo(map);
 
+  function getCoordinatesFromAddress(address) {
+    // Nominatim APIを使用して住所をジオコーディング
+    fetch(`https://nominatim.openstreetmap.org/search?format=json&countrycodes=JP&limit=1&q=${encodeURIComponent(address)}`)
+        .then((response) => response.json())
+        .then((data) => {
+            if (data && data.length > 0) {
+                const lat = parseFloat(data[0].lat);
+                const lon = parseFloat(data[0].lon);
+                // ここに地図を更新するコードを追加
+                return {lat, lon};
+            } else {
+                alert('住所が見つかりませんでした。');
+            }
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+            alert('検索中にエラーが発生しました。');
+        });
+}
+
+console.log(getCoordinatesFromAddress('山口県山陽小野田市'))
+//L.marker([34.69388615509474, 135.53129439101346]).addTo(map);
+
   // 現在地を取得
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(

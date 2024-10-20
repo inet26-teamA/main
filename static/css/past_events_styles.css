@@ -15,6 +15,7 @@
     color: #313131;
     transition: 0.3s ease-in-out;
     font-weight: 500;
+    text-decoration:none;
 }
 .back_button a:after {
     position: absolute;

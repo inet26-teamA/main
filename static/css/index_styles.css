@@ -56,10 +56,25 @@ h1 {
 }
 
 #address-input {
-  padding: 5px;
-  width: 250px;
+  width:250px;/*横幅*/
+  padding:10px 20px;/*プレースホルダーの位置調整*/
+  border-radius:4px 0 0 4px;/*左側の角を少し丸める*/		
+  background:#eee;/*検背景カラー*/
+  border:none;/*枠線を消す*/ 
+  outline:0;/*クリック時の青い枠線消す*/	
 }
 
 #search-btn {
   padding: 5px 10px;
+  width:70px;/*横幅*/ 
+  border-radius:0 4px 4px 0;/*右側の角を少し丸める*/ 
+  background:#7fbfff;/*背景カラー*/ 
+  border:none;/*枠線を消す*/ 
+  color:#fff;/*テキストカラー*/ 
+  font-size:16px;/*フォントサイズ指定*/ 
+  cursor: pointer;/*マウスを乗せると指差しポインターになる*/
+}
+/*検索ボタンマウスオーバー時*/
+#search-btn:hover {
+  background: #92dbff;/*背景カラー変更*/
 }

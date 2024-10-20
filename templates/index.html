@@ -58,7 +58,7 @@
     document.getElementById('search-btn').addEventListener('click', function() {
       const address = document.getElementById('address-input').value;
   
-      fetch('/search_address', {
+      fetch('/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

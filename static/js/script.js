@@ -29,6 +29,24 @@ function initMap() {
     const defaultCoords = [35.6762, 139.6503]; // 東京の座標
     map.setView(defaultCoords, 12);
   }
+  // サーバーから住所データを取得し、地図にピンを立てる
+  async function fetchData() {
+    const response = await fetch('add_pin_data'); // サーバーから住所データを取得
+    const data = await response.json();
+    console.log(data);
+    for (let i = 0; i < data.length; i++) {
+      (async () => {
+        const address = await getCoordinatesFromAddress(data[i][0]);
+        if (address) {
+          // マーカーを追加し、ピンにカーソルを合わせるとポップアップで住所を表示
+          L.marker([address.lat, address.lon])
+            .addTo(map)
+            .bindPopup(data[i][1]);  // ここで住所をポップアップ表示
+        }
+      })();
+    }
+  }
+  fetchData();
   // 目的地の検索とルート案内
   document.getElementById('search-btn').addEventListener('click', async function () {
     const address = document.getElementById('address-input').value;
@@ -79,6 +97,23 @@ function initMap() {
     } catch (error) {
       console.error('ルート取得エラー:', error);
       alert('ルート検索中にエラーが発生しました。');
+    }
+  }
+  // 住所から座標を取得するための関数
+  async function getCoordinatesFromAddress(address) {
+    try {
+      const response = await fetch(`https://nominatim.openstreetmap.org/search?format=json&countrycodes=JP&limit=1&q=${encodeURIComponent(address)}`);
+      const data = await response.json();
+      if (data && data.length > 0) {
+        const lat = parseFloat(data[0].lat);
+        const lon = parseFloat(data[0].lon);
+        return { lat, lon }; // 成功した場合に座標を返す
+      } else {
+        return null; // 何も見つからなかった場合
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      return null; // エラーが発生した場合
     }
   }
 }

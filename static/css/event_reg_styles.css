@@ -127,7 +127,6 @@ label {
 .back_button{
     margin-right: auto;
 }
-
 .back_button a {
     background: #eee;
     border-radius: 50px;
@@ -143,6 +142,7 @@ label {
     font-weight: 500;
     text-decoration:none;
 }
+
 .back_button a:after {
     position: absolute;
     top: 50%;

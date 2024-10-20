@@ -17,25 +17,24 @@ def index():
     #message = gemini.ask_gemini(pronpt)
     return render_template('index.html', pins=pins, images = weather_img, gemini_message = message)
 
-# 新しいピンを追加するページのエンドポイント
-@app.route('/event_reg', methods=['GET', 'POST'])
+@app.route('/event_reg')
 def event_reg():
-    # まだ仮
-    if request.method == 'POST':
-        # フォームからピンの情報を取得
-        name = request.form['name']
-        latitude = float(request.form['latitude'])
-        longitude = float(request.form['longitude'])
+    return render_template('event_reg.html')
 
-        # ピン情報をリストに追加
-        pins.append({
-            'name': name,
-            'latitude': latitude,
-            'longitude': longitude
-        })
+# 新しいピンを追加するページのエンドポイント
+@app.route('/submit', methods=['POST'])
+def submit():
+    eventname = request.form.get('eventname')
+    zipcode = request.form.get('zipcode')
+    address = request.form.get('address')
+    username = request.form.get('username')
+    start_date = request.form.get('start-date')
+    end_date = request.form.get('end-date')
 
-        # 地図ページにリダイレクト
-        return redirect('/')
+    print(eventname)
+    
+
+    #return f"イベント名: {eventname}, 郵便番号: {zipcode}, 住所: {address}, 番地: {username}, 開始日: {start_date}, 終了日: {end_date}"
     return render_template('event_reg.html')
 
 @app.route('/past_events', methods=['GET'])

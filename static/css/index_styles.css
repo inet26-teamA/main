@@ -10,6 +10,7 @@ body, html {
 #map {
   height: 80vh; /* ビューポートの高さの80%を使用 */
   width: 100%;
+  margin : 20px ;
 }
 
 /* ヘッダーのスタイル */
@@ -32,6 +33,9 @@ h1 {
 .top-left-container {
   /* background-color: red; */
   width: 300px;
+  border: solid 3px #6091d3;/*線*/
+  border-radius: 10px;/*角の丸み*/
+  text-align: center;
 }
 
 .weather-gemini-message {

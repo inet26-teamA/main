@@ -17,6 +17,10 @@ def index():
     #message = gemini.ask_gemini(pronpt)
     return render_template('index.html', pins=pins, images = weather_img, gemini_message = message)
 
+@app.route('/add_pin_data', methods = ['GET'])
+def add_pin():
+    return jsonify(register_events.get_events('住所'))
+
 @app.route('/event_reg')
 def event_reg():
     return render_template('event_reg.html')
@@ -29,7 +33,8 @@ def submit():
     address = request.form.get('address')
     start_date = request.form.get('start-date')
 
-    address = f"{zipcode}, {address}"
+    # address = f"{zipcode}, {address}" 郵便番号を付ける
+    address = address #郵便番号を付けない
     year, month, date = map(int, start_date.split('-'))
     #print(f'イベント名: {eventname} , 住所: {address} , 日時: {year},{month},{date}')
     register_events.add_events(year, month, date, eventname, address)

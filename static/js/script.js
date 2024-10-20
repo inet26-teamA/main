@@ -17,23 +17,34 @@ function initMap() {
         const lon = parseFloat(data[0].lon);
         return { lat, lon }; // 成功した場合に座標を返す
       } else {
-        alert('住所が見つかりませんでした。');
+        // alert('住所が見つかりませんでした。');
         return null; // 何も見つからなかった場合
       }
     } catch (error) {
       console.error('Error:', error);
-      alert('検索中にエラーが発生しました。');
+      // alert('検索中にエラーが発生しました。');
       return null; // エラーが発生した場合
     }
   }
+
   
-  (async () => {
-    const coords = await getCoordinatesFromAddress('山口県山陽小野田市');
-    if (coords) {
-      console.log(coords); // 座標を表示
-      L.marker([coords.lat, coords.lon]).addTo(map); // 例えば地図にマーカーを追加
+  fetchData()
+  async function fetchData() {
+    const response = await fetch('add_pin_data');
+    const data = await response.json();
+    console.log(data);
+    for (let i = 0; i < data.length; i++){
+      (async () => {
+        const coords = await getCoordinatesFromAddress(data[i]);
+        if (coords) {
+          console.log(coords); // 座標を表示
+          L.marker([coords.lat, coords.lon]).addTo(map); // 例えば地図にマーカーを追加
+        }
+      })();
+
     }
-  })();
+  }
+
   
 //L.marker([34.69388615509474, 135.53129439101346]).addTo(map);
 

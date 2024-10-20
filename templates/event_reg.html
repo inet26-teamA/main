@@ -16,60 +16,56 @@
 
   <h1>登録画面</h1>
 
-  <form method="POST" action="/submit" class="vertical-form"> <!-- methodとactionを追加 -->
-
+  <form method="POST" action="/submit" class="vertical-form"> 
     <h2>イベント名</h2>
-    <input type="text" id="eventname" name="eventname" required> <!-- 必要なname属性を追加 -->
+    <input type="text" id="eventname" name="eventname" required>
 
     <h2>場所情報</h2>
     <div class="zipcode-group">
       <label for="zipcode">郵便番号:</label>
-      <input type="text" id="zipcode" name="zipcode" oninput="fetchAddress(this.value)" placeholder="3360000" required>
+      <input type="text" id="zipcode" name="zipcode" oninput="fetchAddress(this.value)" placeholder="3360000">
       <button type="button" id="fetch-address-btn">住所補完</button>
     </div>
+
     <label for="address">住所:</label>
-    <input type="text" id="address" name="address" placeholder="東京都世田谷区" readonly required>
+    <input type="text" id="address" name="address" placeholder="東京都世田谷区" required> 
+
     <label for="username">番地:</label>
     <input type="text" id="username" name="username" placeholder="3-3-33" required>
-    
+
     <h2>詳細</h2>
+    <div id="date-form">
+      <label for="start-date">開催日:</label>
+      <input type="date" id="start-date" name="start-date">
+    </div>
 
-    <form id="date-form">
-      <label for="start-date">開催日:</label> <!-- 開催期間のラベル -->
-      <input type="date" id="start-date" name="start-date"> <!-- 開始日 -->
+    <button id="regist_button" type="submit">登録</button>
+  </form>
 
-      <button id="regist_button"t type="submit">登録</button>
-    </form>
+  <script>
+    const addressInput = document.getElementById('address');
+    const fetchButton = document.getElementById('fetch-address-btn');
 
-    <script>
-      const addressInput = document.getElementById('address');
-      const fetchButton = document.getElementById('fetch-address-btn');
+    fetchButton.addEventListener('click', function () {
+      const zipCode = document.getElementById('zipcode').value;
 
-      fetchButton.addEventListener('click', function () {
-        const zipCode = document.getElementById('zipcode').value;
-
-        if (zipCode.length === 7) {
-          addressInput.readOnly = true;
-
-          fetch(`https://api.zipaddress.net/?zipcode=${zipCode}`, { mode: 'cors' })
-            .then(response => response.json())
-            .then(data => {
-              if (data.code === 200) {
-                addressInput.value = data.data.fullAddress;
-              } else {
-                addressInput.value = '住所が見つかりません';
-              }
-            })
-            .catch(error => console.error('エラー:', error))
-            .finally(() => {
-              addressInput.readOnly = false;
-            });
-        } else {
-          alert('郵便番号は7桁で入力してください。');
-        }
-      });
-    </script>
-
+      if (zipCode.length === 7) {
+        fetch(`https://api.zipaddress.net/?zipcode=${zipCode}`, { mode: 'cors' })
+          .then(response => response.json())
+          .then(data => {
+            if (data.code === 200) {
+              addressInput.value = data.data.fullAddress;
+            } else {
+              alert('住所が見つかりません');
+            }
+          })
+          .catch(error => console.error('エラー:', error));
+      } else {
+        alert('郵便番号は7桁で入力してください。');
+      }
+    });
+  </script>
 </body>
+
 
 </html>

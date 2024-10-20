@@ -110,7 +110,7 @@ label {
     justify-content: center; /* 水平方向で中央揃え */
     width: 120px; /* ボタンの幅を120pxに設定 */
     margin: auto; /* ボタンを中央に配置 */
-    padding: 1rem 5rem; /* 上下に1rem、左右に6remのパディングを追加 */
+    padding: 10px 25px; /* 上下に1rem、左右に6remのパディングを追加 */
     font-weight: bold; /* フォントを太字に設定 */
     border: 2px solid #27acd9; /* ボタンの枠線を2pxの実線に設定 */
     color: #27acd9; /* テキストの色を指定 */

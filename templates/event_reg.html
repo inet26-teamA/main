@@ -16,7 +16,7 @@
 
   <h1>登録画面</h1>
 
-  <form method="POST" action="/submit"> <!-- methodとactionを追加 -->
+  <form method="POST" action="/submit" class="vertical-form"> <!-- methodとactionを追加 -->
 
     <h2>イベント名</h2>
     <input type="text" id="eventname" name="eventname" required> <!-- 必要なname属性を追加 -->
@@ -31,7 +31,7 @@
     <input type="text" id="address" name="address" placeholder="東京都世田谷区" readonly required>
     <label for="username">番地:</label>
     <input type="text" id="username" name="username" placeholder="3-3-33" required>
-
+    
     <h2>詳細</h2>
 
     <form id="date-form">

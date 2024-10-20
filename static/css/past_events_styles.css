@@ -1,0 +1,37 @@
+.back_button {
+    position: absolute; /* 絶対位置に設定 */
+    top: 20px; /* 上からの距離 */
+    left: 20px; /* 左からの距離 */
+    margin-bottom: 20px; /* タイトルとの間に余白を追加 */
+}
+
+.back_button a {
+    background: #eee;
+    border-radius: 50px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 0 auto;
+    max-width: 260px;
+    padding: 10px 25px;
+    color: #313131;
+    transition: 0.3s ease-in-out;
+    font-weight: 500;
+}
+
+.back_button a:after {
+    position: relative;
+    top: 50%;
+    right: 20px;
+    border-radius: 1px;
+    transition: 0.2s ease-in-out;
+    content: "\f0da";
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    transform: translateY(-50%);
+}
+
+.back_button a:hover {
+    background: #313131;
+    color: #FFF;
+}

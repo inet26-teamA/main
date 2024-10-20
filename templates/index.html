@@ -4,6 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
   <title>住所検索付きのLeaflet Map</title>
   <!-- LeafletのCSSを読み込み -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
@@ -53,6 +54,27 @@
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
   <!-- アプリのJavaScriptファイル -->
   <script src="/static/js/script.js"></script>
+  <script>
+    document.getElementById('search-btn').addEventListener('click', function() {
+      const address = document.getElementById('address-input').value;
+  
+      fetch('/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ address: address }),
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+          location.reload(); // 天気が更新されたページにリロード
+        } else {
+          alert('住所の取得に失敗しました');
+        }
+      });
+    });
+  </script>
 </body>
 
 </html>

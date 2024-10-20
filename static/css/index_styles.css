@@ -50,11 +50,20 @@ h1 {
 }
 
 #add-event, #past-events {
-  width: 100px;
-  height: 70px;
-  margin-right: 10px;
+  display: inline-block;
+  padding: 0.3em 1em;
+  text-decoration: none;
+  color: #67c5ff;
+  border: solid 2px #67c5ff;
+  border-radius: 3px;
+  transition: .4s;
+  margin-right: 10px; /* 右側のマージンを指定（例: 10px） */
 }
 
+#add-event:hover, #past-events:hover {
+  background: #67c5ff;
+  color: white;
+}
 #address-input {
   width:250px;/*横幅*/
   padding:10px 20px;/*プレースホルダーの位置調整*/

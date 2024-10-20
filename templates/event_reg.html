@@ -1,13 +1,16 @@
 <!DOCTYPE html>
 <html>
+
 <head>
+  <meta charset="UTF-8">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
   <title>Python and JavaScript Integration</title>
   <link rel="stylesheet" href="/static/css/event_reg_styles.css"> <!-- CSSファイルをリンク -->
 </head>
 
 <body>
-  <button type="button" onclick="history.back()">戻る</button>
+  <button type="button" onclick="history.back()" id="historyback-btn">戻る</button>
+
   <h1>登録画面</h1>
   <h2>イベント名</h2>
   <form>
@@ -36,29 +39,6 @@
   <form id="date-form">
       <label for="start-date">開催期間:</label> <!-- 開催期間のラベル -->
       <input type="date" id="start-date" name="start-date"> <!-- 開始日 -->
-      ~ <!-- 範囲を示すための波線 -->
-      <input type="date" id="end-date" name="end-date"> <!-- 終了日 -->
-      <button id="date_btn" type="submit">送信</button> <!-- 送信ボタン -->
-  </form>
-  <p id="error-message" style="color: red; display: none;"></p> <!-- エラーメッセージ表示用 -->
-  
-  <script>
-      document.getElementById('date-form').addEventListener('submit', function(event) {
-          event.preventDefault(); // フォームのデフォルト送信を防止
-  
-          const startDate = new Date(document.getElementById('start-date').value);
-          const endDate = new Date(document.getElementById('end-date').value);
-  
-          // 日付の検証
-          if (startDate > endDate) {
-              document.getElementById('error-message').innerText = "エラー: 開始日が終了日よりも後になっています。";
-              document.getElementById('error-message').style.display = "block"; // エラーメッセージを表示
-          } else {
-              document.getElementById('error-message').innerText = ""; // エラーメッセージをクリア
-              document.getElementById('error-message').style.display = "none"; // エラーメッセージを非表示
-          }
-      });
-  </script>
 
   <button id="regist_button" type="button">登録</button>
 
